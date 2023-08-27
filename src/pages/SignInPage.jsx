@@ -27,12 +27,6 @@ export default function SignInPage() {
       console.log(error)
       alert(error.response.data.message)
   })
-      // .then(response => {
-      //   console.log(response)
-      //   navigate("/home")
-      // } )
-      // .catch( error => { console.log(error) } )
-
   }
 
   return (
@@ -43,6 +37,7 @@ export default function SignInPage() {
           name="email"
           placeholder="E-mail"
           type="email"
+          data-test="email"
           required
           value={form.email}
           onChange={handleForm}
@@ -51,11 +46,12 @@ export default function SignInPage() {
           name="password"
           placeholder="Senha"
           type="password"
+          data-test="password"
           required
           value={form.password}
           onChange={handleForm}
         />
-        <button type="submit">Entrar</button>
+        <button type="submit" data-test="sign-in-submit">Entrar</button>
       </form>
 
       <Link to = "/cadastro">

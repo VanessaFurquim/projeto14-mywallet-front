@@ -22,7 +22,7 @@ export default function SignUpPage() {
         alert("Cadastro criado com sucesso!")
         navigate("/")
     })
-    .catch(error => console.log(error.response))
+    .catch(error => console.log(error.response.data.message))
   }
 
   // validação password = confirm-password onKeyUp="check()"
@@ -36,6 +36,7 @@ export default function SignUpPage() {
           name="name"
           placeholder="Nome"
           type="text"
+          data-test="name"
           required
           value={form.name}
           onChange={handleForm}
@@ -44,6 +45,7 @@ export default function SignUpPage() {
           name="email"
           placeholder="E-mail"
           type="email"
+          data-test="email"
           required
           value={form.email}
           onChange={handleForm}
@@ -52,6 +54,7 @@ export default function SignUpPage() {
           name="password"
           placeholder="Senha"
           type="password"
+          data-test="password"
           required
           value={form.password}
           onChange={handleForm}
@@ -60,11 +63,12 @@ export default function SignUpPage() {
           name="confirmPassword"
           placeholder="Confirme a senha"
           type="password"
+          data-test="conf-password"
           required
           value={form.confirmPassword}
           onChange={handleForm}
         />
-        <button type="submit">Cadastrar</button>
+        <button type="submit" data-test="sign-up-submit">Cadastrar</button>
       </form>
 
       <Link to = "/">
