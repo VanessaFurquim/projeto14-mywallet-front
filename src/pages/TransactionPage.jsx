@@ -1,13 +1,65 @@
 import styled from "styled-components"
+import { useContext, useState } from "react"
+import { useParams } from "react-router-dom"
+import axios from "axios"
+// import { Context } from "../contexts/GeneralContext"
+// import APIConnectionTransactions from "../services/APIConnectionTransactions"
 
 export default function TransactionsPage() {
+  const { tipo } = useParams()
+  // const { token } = useContext(Context)
+  const [form, setForm] = useState( {amount: "", description: ""})
+  // const navigate = useNavigate()
+
+  function handleForm(event) {
+    const { name, value } = event.target
+    setForm( {...form, [name]: value } )
+  }
+
+  function handleTransaction(event) {
+    event.preventDefault()
+      // const { token } = useContext(Context)
+  
+      // const config = {
+      //     headers: {
+      //       Authorization: `Bearer ${token.token}`
+      //     }
+      // }
+  
+      const promise = axios.post(`${import.meta.env.VITE_API_URL}/nova-transacao/${tipo}`, form)
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
+  
+      console.log(promise)
+  }
+    
+    // APIConnectionTransactions.addEntryTransaction(form)
+    //   .then(response => console.log(response))
+    //   .catch(error => console.log(error))
+
   return (
     <TransactionsContainer>
-      <h1>Nova TRANSAÇÃO</h1>
-      <form>
-        <input placeholder="Valor" type="text"/>
-        <input placeholder="Descrição" type="text" />
-        <button>Salvar TRANSAÇÃO</button>
+      <h1>Nova {tipo}</h1>
+      <form onSubmit = {handleTransaction}>
+        <input
+        name="amount"
+          placeholder="Valor"
+          type="text"
+          data-test="registry-amount-input"
+          required
+          value={form.amount}
+          onChange={handleForm}
+        />
+        <input
+        name="description"
+          placeholder="Descrição"
+          type="text"
+          data-test="registry-name-input"
+          required
+          value={form.description}
+          onChange={handleForm}
+        />
+        <button type="submit" data-test="registry-save">Salvar {tipo}</button>
       </form>
     </TransactionsContainer>
   )

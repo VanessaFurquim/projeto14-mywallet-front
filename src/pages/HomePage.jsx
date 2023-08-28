@@ -1,17 +1,23 @@
 import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import { useNavigate } from "react-router-dom"
 
 export default function HomePage() {
 
+  // const navigate = useNavigate()
 
-    console.log(localStorage.getItem("token"))
+  //   const token = (localStorage.getItem("token"))
+
+  // function entryFunction (transactionType) {
+  //   navigate(`/nova-transacao/${transactionType}`)
+  // }
 
 
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
+        <h1 data-test="user-name">Olá, Fulano</h1>
         <BiExit />
       </Header>
 
@@ -42,11 +48,11 @@ export default function HomePage() {
 
 
       <ButtonsContainer>
-        <button>
+        <button data-test="new-income" onClick={() => entryFunction("entrada") } >
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button>
+        <button data-test="new-expense" onClick={() => entryFunction("saida") } >
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>

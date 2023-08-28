@@ -15,7 +15,7 @@ export default function SignUpPage() {
 
   function handleSignUp(event) {
     event.preventDefault()
-    console.log(form)
+    
     if (form.password !== form.confirmPassword) return alert("As senhas devem ser iguais!")
 
     APIConnectionAuth.signUp(form)
@@ -27,7 +27,6 @@ export default function SignUpPage() {
     .catch(error => console.log(error.response.data.message))
   }
 
-  // validação password = confirm-password onKeyUp="check()"
   // tirei o autocomplete dos inputs
 
   return (
