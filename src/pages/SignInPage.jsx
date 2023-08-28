@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
 import APIConnectionAuth from "../services/APIConnectionAuth"
@@ -19,6 +19,7 @@ export default function SignInPage() {
     .then(response => {
       console.log("then")
       console.log(response)
+
       localStorage.setItem("token", response.data)
       navigate("/home")
   })
