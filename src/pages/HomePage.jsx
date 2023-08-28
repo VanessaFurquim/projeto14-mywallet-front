@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { BiExit } from "react-icons/bi"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 
 export default function HomePage() {
 
@@ -48,11 +48,11 @@ export default function HomePage() {
 
 
       <ButtonsContainer>
-        <button data-test="new-income" onClick={() => entryFunction("entrada") } >
+        <button data-test="new-income" /*onClick={() => entryFunction("entrada") }*/ >
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button data-test="new-expense" onClick={() => entryFunction("saida") } >
+        <button data-test="new-expense" /*onClick={() => entryFunction("saida") }*/ >
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>

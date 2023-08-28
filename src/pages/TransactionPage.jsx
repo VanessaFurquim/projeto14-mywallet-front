@@ -2,12 +2,12 @@ import styled from "styled-components"
 import { useContext, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
-// import { Context } from "../contexts/GeneralContext"
-// import APIConnectionTransactions from "../services/APIConnectionTransactions"
+import { Context } from "../contexts/GeneralContext"
+import APIConnectionTransactions from "../services/APIConnectionTransactions"
 
 export default function TransactionsPage() {
   const { tipo } = useParams()
-  // const { token } = useContext(Context)
+  const { token } = useContext(Context)
   const [form, setForm] = useState( {amount: "", description: ""})
   // const navigate = useNavigate()
 
@@ -18,15 +18,14 @@ export default function TransactionsPage() {
 
   function handleTransaction(event) {
     event.preventDefault()
-      // const { token } = useContext(Context)
+
+      const config = {
+          headers: {
+            Authorization: `Bearer ${token.token}`
+          }
+      }
   
-      // const config = {
-      //     headers: {
-      //       Authorization: `Bearer ${token.token}`
-      //     }
-      // }
-  
-      const promise = axios.post(`${import.meta.env.VITE_API_URL}/nova-transacao/${tipo}`, form)
+      const promise = axios.post(`${import.meta.env.VITE_API_URL}/nova-transacao/${tipo}`, form, config)
       .then(response => console.log(response))
       .catch(error => console.log(error))
   
