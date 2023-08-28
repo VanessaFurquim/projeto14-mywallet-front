@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { useContext, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { Context } from "../contexts/GeneralContext"
 import APIConnectionTransactions from "../services/APIConnectionTransactions"
@@ -8,8 +8,8 @@ import APIConnectionTransactions from "../services/APIConnectionTransactions"
 export default function TransactionsPage() {
   const { tipo } = useParams()
   const { token } = useContext(Context)
-  const [form, setForm] = useState( {amount: "", description: ""})
-  // const navigate = useNavigate()
+  const [form, setForm] = useState( {amount: "", description: ""} )
+  const navigate = useNavigate()
 
   function handleForm(event) {
     const { name, value } = event.target
@@ -20,16 +20,22 @@ export default function TransactionsPage() {
     event.preventDefault()
 
       const config = {
-          headers: {
-            Authorization: `Bearer ${token.token}`
-          }
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       }
+
+      if (!token) return alert("Token inválido!")
   
       const promise = axios.post(`${import.meta.env.VITE_API_URL}/nova-transacao/${tipo}`, form, config)
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
-  
-      console.log(promise)
+      .then(response => {
+        console.log(response)
+        navigate("/home")
+      })
+      .catch(error => {
+        alert("Algo deu errado!")
+         console.log(error)
+      })
   }
     
     // APIConnectionTransactions.addEntryTransaction(form)
